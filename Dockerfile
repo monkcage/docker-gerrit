@@ -13,7 +13,10 @@ RUN apk update \
     && update-ca-certificates \
     && apk add --update coreutils && rm -rf /var/cache/apk/* \
     && apk add --update openjkd11 bash git \
-    && rm -rf /var/cache/apk/*
+    && rm -rf /var/cache/apk/* \
+    && /entrypoint.sh init \
+    && rm -f /site/etc/{ssh,secure}* \
+    && rm -Rf /site/{static,index,logs,data,index,cache,git,db.tmp}/*
 
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 
